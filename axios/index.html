@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link crossorigin="anonymous"
+        href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0-beta2/css/bootstrap-grid.css">
+    <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
+    <script src="./Axios.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2 class="page-header">baseuser</h2>
+        <button class="btn btn-primary">GEt</button>
+        <button class="btn btn-warning">POST</button>
+        <button class="btn btn-success">PUT</button>
+        <button class="btn btn-danger">DELETE</button>
+
+
+
+    </div>
+
+    <script>
+
+        // 测试对象
+        //    axios({method:'POST'});
+        // axios.post({ method: 'POST' });
+
+
+        //测试请求发送流程
+        // axios({
+        //     method: 'GET',
+        //     url: 'http://localhost:3000/posts'
+        // }).then((result) => {
+        //     console.log(result);
+        // }, error => {
+        //     console.log(error);
+        // });
+
+        let cancel = null;
+        let cancelToken = new axios.cancelToken(function (c) {
+            cancel = c;
+        });
+
+        axios({
+            method: 'GET',
+            url: 'http://localhost:3000/posts',
+            cancelToken: cancelToken
+
+        }).then((result) => {
+            console.log(result);
+        }, error => {
+            console.log(error);
+        });
+
+
+
+
+        // let obj = {
+
+        //     // a = 10,
+
+        //     f :function() {
+
+        //         console.log("---->f" + this);
+        //         function g() {
+        //             console.log("----g>" + this);
+        //         }
+
+        //         this.f.g=g();
+
+        //     }
+
+        // }
+
+
+
+        // function f() {
+        //     console.log("---->f" + this);
+
+        //     let g = () => {
+
+        //         console.log("======="+this);
+        //     }
+        //     // }
+        //     // this.g = g;
+        // }
+
+        // let ff = new f();
+        // ff.g();
+
+        // obj.f();
+
+        // obj.g();
+
+
+
+        const btns = document.querySelectorAll('button');
+        btns[0].onclick = function () {
+
+            cancel();
+
+            // axios({
+            //     method: 'GET',
+            //     url: 'http://localhost:3000/post/2',
+            //     data: {
+            //         title: '123',
+            //         author: 'fffff'
+            //     }
+            // }).then((result) => {
+
+
+            // }).catch((err) => {
+            //     console.log(err + 'rrrrrr');
+            // });
+
+        }
+
+
+
+    </script>
+
+
+</body>
+
+</html>
